@@ -21,7 +21,7 @@ public class RandomService extends Service {
     private Subscription subscription;
     private Integer latestValue;
     private final IBinder mBinder = new LocalBinder();
-    private Random random = new Random(Integer.MAX_VALUE);
+    private Random random = new Random();
     private NotificationValueListener defaultListener;
 
     private ValueListener valueListener;
@@ -37,11 +37,11 @@ public class RandomService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        runComputing();
+        runTimerIfNeed();
         return START_STICKY;
     }
 
-    private void runComputing() {
+    private void runTimerIfNeed() {
         if (subscription != null && !subscription.isUnsubscribed()) {
             return;
         }
@@ -50,14 +50,14 @@ public class RandomService extends Service {
                 .subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {
-                        latestValue = random.nextInt();
+                        latestValue = random.nextInt(1000);
                         notifyListeners();
                     }
                 });
     }
 
     public void setValueListener(ValueListener valueListener) {
-        runComputing();
+        runTimerIfNeed();
         this.valueListener = valueListener;
         defaultListener.cancelNotification();
         if (latestValue != null && valueListener != null) {

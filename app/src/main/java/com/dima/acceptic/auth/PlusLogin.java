@@ -87,6 +87,7 @@ public class PlusLogin implements GoogleApiClient.ConnectionCallbacks, GoogleApi
         } else if (pendingRequest == PendingRequest.SIGN_IN) {
             executeSignInRequest();
         }
+        pendingRequest = PendingRequest.NONE;
     }
 
     private void executeSignInRequest() {
@@ -99,43 +100,27 @@ public class PlusLogin implements GoogleApiClient.ConnectionCallbacks, GoogleApi
     }
 
     private void executeSignOutRequest() {
-        Auth.GoogleSignInApi.revokeAccess(apiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                pendingRequest = PendingRequest.NONE;
-            }
-        });
-        Auth.GoogleSignInApi.signOut(apiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                pendingRequest = PendingRequest.NONE;
-            }
-        });
+        Auth.GoogleSignInApi.revokeAccess(apiClient);
+        Auth.GoogleSignInApi.signOut(apiClient);
     }
 
     public void onActivityResult(int request, int result, Intent data) {
         if (request == REQUEST_CODE) {
-            if (result == 0) {
-                pendingRequest = PendingRequest.NONE;
-            }
             handleSignInResult(Auth.GoogleSignInApi.getSignInResultFromIntent(data));
         }
     }
 
     private void handleSignInResult(GoogleSignInResult result) {
-        pendingRequest = PendingRequest.NONE;
-        signOut();
         if (result != null && result.isSuccess()) {
             GoogleSignInAccount signInAccount = result.getSignInAccount();
-            String token = signInAccount != null ? signInAccount.getServerAuthCode() : null;
-            if (token == null) {
-                callback.onError(new RuntimeException("token == null"));
+            if (signInAccount == null) {
+                callback.onError(new RuntimeException("account == null"));
             } else {
-                callback.onSuccess(token);
+                callback.onSuccess(signInAccount);
             }
 
         } else {
-            callback.onError(new RuntimeException("signing result  == failed"));
+            callback.onError(new RuntimeException("Login canceled"));
         }
 
     }
@@ -148,7 +133,7 @@ public class PlusLogin implements GoogleApiClient.ConnectionCallbacks, GoogleApi
     }
 
     public interface Callback {
-        void onSuccess(String token);
+        void onSuccess(GoogleSignInAccount account);
 
         void onError(Exception e);
     }

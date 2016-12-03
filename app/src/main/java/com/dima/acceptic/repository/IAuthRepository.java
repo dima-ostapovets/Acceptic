@@ -8,6 +8,10 @@ public interface IAuthRepository {
     void setAuthToken(String token);
     String getAuthToken();
 
+    void setName(String name);
+
+    String getName();
+
     boolean isLoggedIn();
 
     void logout();

@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements ServiceConnection, RandomService.ValueListener {
+    public static final int PAGES = 2;
     @BindView(R.id.pager)
     ViewPager viewPager;
     @BindView(R.id.tabLayout)
@@ -51,12 +52,14 @@ public class MainActivity extends AppCompatActivity implements ServiceConnection
         tabLayout.setupWithViewPager(viewPager);
         ArrayList<Fragment> fragments = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
-        titles.add(getString(R.string.page_name, "1"));
-        titles.add(getString(R.string.page_name, "2"));
-        fragments.add(DummyFragment.newInstance(titles.get(0)));
-        fragments.add(DummyFragment.newInstance(titles.get(1)));
+        for (int i = 0; i < PAGES; i++) {
+            String title = getString(R.string.page_name, String.valueOf(i + 1));
+            titles.add(title);
+            fragments.add(DummyFragment.newInstance(title));
+        }
         viewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), fragments, titles));
         setSupportActionBar(toolbar);
+        setTitle(getString(R.string.hello, authRepository.getName()));
     }
 
     @Override

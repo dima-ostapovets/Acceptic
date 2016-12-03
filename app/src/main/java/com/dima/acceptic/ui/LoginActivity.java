@@ -9,6 +9,7 @@ import android.view.View;
 import com.dima.acceptic.R;
 import com.dima.acceptic.auth.PlusLogin;
 import com.dima.acceptic.repository.AuthRepository;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements PlusLogin.Callba
 
     @OnClick(R.id.btnLogin)
     void onLoginClick(){
+        plusLogin.signOut();//just to always show google login form
         plusLogin.signIn();
     }
 
@@ -46,8 +48,9 @@ public class LoginActivity extends AppCompatActivity implements PlusLogin.Callba
     }
 
     @Override
-    public void onSuccess(String token) {
-        authRepository.setAuthToken(token);
+    public void onSuccess(GoogleSignInAccount account) {
+        authRepository.setAuthToken(account.getServerAuthCode());
+        authRepository.setName(account.getDisplayName());
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

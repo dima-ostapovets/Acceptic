@@ -10,6 +10,7 @@ public class AuthRepository implements IAuthRepository {
 
     public static final String PREFS = AuthRepository.class.getSimpleName();
     public static final String TOKEN = "token";
+    public static final String NAME = "name";
     private final SharedPreferences preferences;
     Context context;
 
@@ -29,6 +30,16 @@ public class AuthRepository implements IAuthRepository {
     }
 
     @Override
+    public void setName(String name) {
+        preferences.edit().putString(NAME, name).apply();
+    }
+
+    @Override
+    public String getName() {
+        return preferences.getString(NAME, null);
+    }
+
+    @Override
     public boolean isLoggedIn() {
         return preferences.getString(TOKEN, null) != null;
     }
@@ -36,5 +47,6 @@ public class AuthRepository implements IAuthRepository {
     @Override
     public void logout() {
         setAuthToken(null);
+        setName(null);
     }
 }
