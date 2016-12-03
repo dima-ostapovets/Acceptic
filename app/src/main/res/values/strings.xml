@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Acceptic</string>
+    <string name="login">Login</string>
+    <string name="page_name">Page %1$s</string>
+    <string name="result">Result: %1$d</string>
+    <string name="log_out">Log out</string>
+    <string name="googlePlus_client_id">289569732716-9dpkb32c2me1giqudvm808m73spc2p4d.apps.googleusercontent.com</string>
+</resources>
