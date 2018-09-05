@@ -22,6 +22,7 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew clean -x lintDebug testDebug assembleDebug
+
 #      - save_cache:
 #          paths:
 #            - ~/.gradle
