@@ -6,5 +6,3 @@ PROJECT_DIR="$DIR/.."
 
 pushd "$PROJECT_DIR"
 echo "run from build.sh"
-
-popd
