@@ -7,6 +7,7 @@ jobs:
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
+      - pwd
       - run:
           name : Just print
           command: ./.circleci/build.sh
