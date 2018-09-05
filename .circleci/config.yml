@@ -9,7 +9,7 @@ jobs:
     steps:
       - run:
           name : Just print
-          command: ./.circleci/build.sh
+          command: ./build.sh
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
