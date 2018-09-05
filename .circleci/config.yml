@@ -8,6 +8,8 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - run:
+          command: pwd
+      - run:
           command: ls -1 -a
       - run:
           name : Just print
