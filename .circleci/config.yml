@@ -8,11 +8,6 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
-      - run:
-          command: pwd
-      - run:
-          command: ls -1 -a
-      - run:
           name : Just print
           command: ./.circleci/build.sh
       - restore_cache:
@@ -20,6 +15,8 @@ jobs:
 #      - run:
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
+     - run:
+          command:  export TERM=${TERM:-dumb}
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
