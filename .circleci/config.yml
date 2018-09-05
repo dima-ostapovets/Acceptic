@@ -16,6 +16,7 @@ jobs:
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
      - run:
+          name: Set Term
           command:  export TERM=${TERM:-dumb}
       - run:
           name: Download Dependencies
