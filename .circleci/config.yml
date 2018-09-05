@@ -8,13 +8,13 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
-           - run:
-               command: pwd
-           - run:
-               command: ls -1 -a
-           - run:
-               name : Just print
-               command: ./.circleci/build.sh
+      - run:
+          command: pwd
+      - run:
+          command: ls -1 -a
+      - run:
+          name : Just print
+          command: ./.circleci/build.sh
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
