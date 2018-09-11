@@ -23,5 +23,5 @@ workflows:
       - build
       - hold:
           type: approval
-          requires
+          requires:
             - build
