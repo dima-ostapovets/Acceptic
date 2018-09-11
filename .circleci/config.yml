@@ -19,6 +19,7 @@ jobs:
   print:
     working_directory: ~/Acceptic
     steps:
+      - checkout
       - run:
           name : Just print
           command: ./.circleci/build.sh $CIRCLE_BUILD_NUM
