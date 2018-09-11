@@ -14,16 +14,14 @@ jobs:
       - store_artifacts:
           path: app/build/reports
           destination: reports
-      - hold:
-          type: approval # requires that an in-app button be clicked by an appropriate member of the project to continue.
-          requires:
-            - store_artifacts
       - store_test_results:
           path: app/build/test-results
-          requires:
-            - hold
 workflows:
   version: 2
   build:
     jobs:
+      - hold:
+          type: approval # requires that an in-app button be clicked by an appropriate member of the project to continue.
       - build
+          requeires
+            -hold
