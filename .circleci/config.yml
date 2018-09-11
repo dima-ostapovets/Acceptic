@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run:
           name : Just print
-          command: ./.circleci/build.sh CIRCLE_BUILD_NUM
+          command: ./.circleci/build.sh $CIRCLE_BUILD_NUM
       - run:
           name: Download Dependencies
           command: ./gradlew clean -x lintDebug  assembleDebug
