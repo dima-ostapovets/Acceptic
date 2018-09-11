@@ -18,9 +18,10 @@ jobs:
           path: app/build/test-results
   print:
     working_directory: ~/Acceptic
-    - run:
-        name : Just print
-        command: ./.circleci/build.sh $CIRCLE_BUILD_NUM
+    steps:
+      - run:
+          name : Just print
+          command: ./.circleci/build.sh $CIRCLE_BUILD_NUM
 workflows:
   version: 2
   build:
