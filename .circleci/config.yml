@@ -28,6 +28,7 @@ jobs:
           name : Variables
           command: |
             echo "$CI $CI_PULL_REQUEST $CIRCLE_BRANCH $CIRCLE_BUILD_NUM $CIRCLE_BUILD_URL $CIRCLE_COMPARE_URL"
+            echo "$CIRCLE_PULL_REQUEST $CIRCLE_JOB"
       - run:
           name : Just print
           command: ./.circleci/build.sh $CIRCLE_BUILD_NUM
