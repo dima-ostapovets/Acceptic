@@ -26,7 +26,7 @@ jobs:
       - checkout
       - run:
         command: |
-         echo $CI $CI_PULL_REQUEST $CIRCLE_BRANCH $CIRCLE_BUILD_NUM $CIRCLE_BUILD_URL $CIRCLE_COMPARE_URL
+         echo '$CI $CI_PULL_REQUEST $CIRCLE_BRANCH $CIRCLE_BUILD_NUM $CIRCLE_BUILD_URL $CIRCLE_COMPARE_URL'
       - run:
           name : Just print
           command: ./.circleci/build.sh $CIRCLE_BUILD_NUM
