@@ -25,6 +25,7 @@ jobs:
     steps:
       - checkout
       - run:
+        name : Variables
         command: |
          echo '$CI $CI_PULL_REQUEST $CIRCLE_BRANCH $CIRCLE_BUILD_NUM $CIRCLE_BUILD_URL $CIRCLE_COMPARE_URL'
       - run:
