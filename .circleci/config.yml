@@ -25,7 +25,7 @@ jobs:
     steps:
       - checkout
       - run:
-        command |
+        command: |
          echo $CI $CI_PULL_REQUEST
       - run:
           name : Just print
