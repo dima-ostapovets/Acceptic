@@ -25,6 +25,9 @@ jobs:
     steps:
       - checkout
       - run:
+        command |
+         echo $CI $CI_PULL_REQUEST
+      - run:
           name : Just print
           command: ./.circleci/build.sh $CIRCLE_BUILD_NUM
 workflows:
@@ -35,6 +38,3 @@ workflows:
       - print:
           requires:
             - build
-          filters:
-            branches:
-              only: master
