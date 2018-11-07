@@ -13,4 +13,4 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
   script:
-  - ./gradlew clean test build
+  - ./gradlew clean test assembleDebug
